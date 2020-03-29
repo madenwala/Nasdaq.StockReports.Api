@@ -31,11 +31,6 @@ namespace Nasdaq.StockReports.Api
         {
             return this.GetAsync<EarningsSurpriseResponse>($"company/{ticker}/earnings-surprise");
         }
-
-        public Task<StockDataResponse> GetStockAsync(string ticker)
-        {
-            return this.GetAsync<StockDataResponse>($"quote/{ticker}/summary?assetclass=stocks");
-        }
     }
 
     /// <summary>

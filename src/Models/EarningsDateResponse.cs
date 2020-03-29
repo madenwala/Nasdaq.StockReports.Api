@@ -14,7 +14,7 @@ namespace Nasdaq.StockReports.Api.Models
         public string announcement { get; set; }
         public string reportText { get; set; }
 
-        public DateTime? EstimatedDate
+        public DateTime? Date
         {
             get
             {
