@@ -14,22 +14,49 @@ namespace Nasdaq.StockReports.Api
 
         public Task<EarningsDateResponse> GetEarningsDateAsync(string ticker)
         {
+            ticker = this.GetTicker(ticker);
             return this.GetAsync<EarningsDateResponse>($"analyst/{ticker}/earnings-date");
         }
 
         public Task<EarningsForecastResponse> GetEarningsForecastAsync(string ticker)
         {
+            ticker = this.GetTicker(ticker);
             return this.GetAsync<EarningsForecastResponse>($"analyst/{ticker}/earnings-forecast");
         }
 
         public Task<EarningsMomentumResponse> GetEarningsMomentumAsync(string ticker)
         {
+            ticker = this.GetTicker(ticker);
             return this.GetAsync<EarningsMomentumResponse>($"analyst/{ticker}/estimate-momentum");
         }
 
         public Task<EarningsSurpriseResponse> GetEarningsSurpriseAsync(string ticker)
         {
+            ticker = this.GetTicker(ticker);
             return this.GetAsync<EarningsSurpriseResponse>($"company/{ticker}/earnings-surprise");
+        }
+
+        public Task<StockPriceTargetsResponse> GetStockPriceTargetsAsync(string ticker)
+        {
+            ticker = this.GetTicker(ticker);
+            return this.GetAsync<StockPriceTargetsResponse>($"analyst/{ticker}/targetprice");
+        }
+
+        public Task<StockDataResponse> GetStockDataAsync(string ticker)
+        {
+            ticker = this.GetTicker(ticker);
+            return this.GetAsync<StockDataResponse>($"quote/{ticker}/summary?assetclass=stocks");
+        }
+
+        public Task<StockRatingsResponse> GetStockRatingsAsync(string ticker)
+        {
+            ticker = this.GetTicker(ticker);
+            return this.GetAsync<StockRatingsResponse>($"analyst/{ticker}/ratings");
+        }
+
+        private string GetTicker(string ticker)
+        {
+            return ticker?.ToUpperInvariant().Trim();
         }
     }
 

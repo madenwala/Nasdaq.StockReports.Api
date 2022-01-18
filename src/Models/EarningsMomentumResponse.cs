@@ -55,24 +55,24 @@
     public class Quarterdatadown
     {
         public string changeType { get; set; }
-        public int changeValue { get; set; }
+        public string changeValue { get; set; }
     }
 
     public class Quarterdataup
     {
         public string changeType { get; set; }
-        public int changeValue { get; set; }
+        public string changeValue { get; set; }
     }
 
     public class Yeardatadown
     {
         public string changeType { get; set; }
-        public int changeValue { get; set; }
+        public string changeValue { get; set; }
     }
 
     public class Yeardataup
     {
         public string changeType { get; set; }
-        public int changeValue { get; set; }
+        public string changeValue { get; set; }
     }
 }

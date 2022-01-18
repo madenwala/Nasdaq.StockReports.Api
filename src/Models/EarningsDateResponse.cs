@@ -14,22 +14,23 @@ namespace Nasdaq.StockReports.Api.Models
         public string announcement { get; set; }
         public string reportText { get; set; }
 
-        public DateTime? Date
+        public DateTime? ReportDate
         {
             get
             {
-                if (!string.IsNullOrEmpty(this.reportText))
-                {
-                    var regex = new Regex(@"\d{2}\/\d{2}\/\d{4}");
-                    foreach (Match m in regex.Matches(this.reportText))
-                    {
-                        DateTime dt;
-                        if (DateTime.TryParseExact(m.Value, "MM/dd/yyyy", null, DateTimeStyles.None, out dt))
-                            return dt;
-                    }
-                }
+                return Extensions.ParseDate(this.reportText);
+            }
+        }
 
-                return null;
+        public string CompanyName
+        {
+            get
+            {
+                var index = this.reportText.IndexOf(" is");
+                if (index > 0 && this.reportText?.Length > index)
+                    return this.reportText.Substring(0, index).Trim();
+                else
+                    return null;
             }
         }
 
@@ -38,6 +39,14 @@ namespace Nasdaq.StockReports.Api.Models
             get
             {
                 return this.reportText?.IndexOf("estimated", StringComparison.InvariantCultureIgnoreCase) >= 0;
+            }
+        }
+
+        public bool IsNotEstimated
+        {
+            get
+            {
+                return this.reportText?.IndexOf("hasn't provided us", StringComparison.InvariantCultureIgnoreCase) >= 0;
             }
         }
 
